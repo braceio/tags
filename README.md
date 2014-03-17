@@ -65,10 +65,6 @@ Tags has two commands, the `build` command and the `serve` command. Build is use
 
     tags build
 
-Serve will start a local webserver that you can use for testing. 
-
-    tags serve
-
 By default, Brace Tags compiles all the .html files in your site. Tags places the generated site in the `_site` folder, and ignores those files during future builds. (In fact, it ignores all folders that start with an underscore.)
 
 If you want to be specific about what files to compile, or where your site gets generated, you can specify that with the `--files` and `--out` options:
@@ -79,6 +75,9 @@ As mentioned above, you can track the changes in your site folder and re-build a
 
     tags build --watch
 
+The `serve` command will start a local webserver that you can use for testing. 
+
+    tags serve
 
 For more options and explanation, check out the help:
 
