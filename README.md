@@ -39,6 +39,51 @@ nav.html:
     </ul>        
 
 
+That's basically all there is to Brace Tags. There's almost zero conventions or syntax to learn. It doesn't currently support markdown, or provide fancy optimizations. It's just here to help you avoid duplicating HTML boilerplate on several web pages.
+
+
+## Installing Brace Tags
+
+Brace Tags is written in Python. Most computers today come with Python. You can install it with `easy_install` by opening up your terminal and typing in:
+
+    sudo easy_install brace-tags
+
+(The sudo part will ask you to log-in. It's required because Brace Tags needs to install the `tags` command line script.)
+
+Alternatively, if you're familiar with Python, you can use pip to install it:
+
+    pip install brace-tags
+
+Brace has one external dependency, `watchdog` which is only required if you want to use Brace to monitor a folder for changes, and recompile your site on the fly. Before using the `--watch` option you'll need to install `watchdog`.
+
+    easy_install watchdog
+
+
+## Using Brace Tags
+
+Tags has two commands, the `build` command and the `serve` command. Build is used to generate a site from a source folder. 
+
+    tags build
+
+Serve will start a local webserver that you can use for testing. 
+
+    tags serve
+
+If you want to be specific about what files to compile, or where your site gets generated, you can specify that with the `--files` and `--out` options:
+
+    tags build --files docs/*.html --out www/docs
+
+
+As mentioned above, you can track the changes in your site folder and re-build automatically with the `--watch` option. However this requires that you first install `watchdog`.
+
+    tags build --watch
+
+
+For more options and explanation, check out the help:
+
+    tags --help
+
+
 ## Extending Brace Tags
 
 Tags was built to be easily extended. You can add your own tags to implement custom functionality. 
@@ -58,8 +103,9 @@ In the `/tags/tags.py` file you'll find a function for each template tag. Adding
      produce an args parameter of `['bold', 'italic']`.
    - *context*: A dictionary that contains contextual data that was passed 
      in by the generator. By default it includes only a `filename` key.
-   - *body* (optional): If the tag has a body, contained within an open tag, 
-     and an end tag, it will be passed in as the `body` keyword argument.
+   - *body* (optional): If the tag has an opening tag and a closing tag, 
+     the body is the content between the tags. It will be passed to your 
+     function as the `body` keyword argument.
 
 2. Add the function to the `keys` dictionary that's used to create the template language. For example:
 
