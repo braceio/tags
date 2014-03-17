@@ -90,22 +90,22 @@ Tags was built to be easily extended. You can add your own tags to implement cus
 
 In the `/tags/tags.py` file you'll find a function for each template tag. Adding your own tag requires three steps:
 
-1. Create a new function that will be called by the generator when it encounters your tag. It should look like this:
+1.  Create a new function that will be called by the generator when it encounters your tag. It should look like this:
 
         def print3x_tag(args, context, body=u''):
             ''' A tag that appends 3 copies of its body '''
             return body + body + body
 
-   The arguments that the function accepts should be:
-
-   - *args*: A list of arguments. These come from the opening tag, 
-     for example `{% print3x bold italic %} HAHA! {% endprint3x %}` will 
-     produce an args parameter of `['bold', 'italic']`.
-   - *context*: A dictionary that contains contextual data that was passed 
-     in by the generator. By default it includes only a `filename` key.
-   - *body* (optional): If the tag has an opening tag and a closing tag, 
-     the body is the content between the tags. It will be passed to your 
-     function as the `body` keyword argument.
+    The arguments that the function accepts should be:
+    
+    - *args*: A list of arguments. These come from the opening tag, 
+      for example `{% print3x bold italic %} HAHA! {% endprint3x %}` will 
+      produce an args parameter of `['bold', 'italic']`.
+    - *context*: A dictionary that contains contextual data that was passed 
+      in by the generator. By default it includes only a `filename` key.
+    - *body* (optional): If the tag has an opening tag and a closing tag, 
+      the body is the content between the tags. It will be passed to your 
+      function as the `body` keyword argument.
 
 2. Add the function to the `keys` dictionary that's used to create the template language. For example:
 
