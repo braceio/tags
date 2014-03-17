@@ -1,25 +1,30 @@
 import os
 
 from templatelang import TemplateLanguage
-from utils import checktag
+
+lang = TemplateLanguage(openseq=u'{%', closeseq=u'%}')
+
+@lang.add_tag
+def include(path, context={}):
+    '''
+    Renders the content of a file. File paths should be relative
+    to the site's root folder. Ex: {% include nav.html %}
+    '''
+    fullpath = os.path.join(context.get('rootdir'), path)
+    return open(fullpath).read()
 
 
-@checktag(num_args=1, is_block=False)
-def include_tag(args, context):
-    path = os.path.join(context.get('rootdir'), args[0])
-    return open(path).read()
+@lang.add_tag_with_name('is')
+def _is(path, body=u'', context={}):
+    '''
+    Renders the tag body if the path matches the current file. File paths 
+    should be relative to the site's root folder. 
+    Ex: {% is index.html %}Home!{% endis %}
+    '''
+    return body if path == context.get('filename') else u''
 
 
-@checktag(num_args=1, is_block=True)
-def is_tag(args, context, body=u''):
-    return body if args[0] == context.get('filename') else u''
-
-
-tags = {
-    'include': include_tag,
-    'is': is_tag
-}
-lang = TemplateLanguage(tags)
+# ---- Add your own tags here! -----
 
 
 def render(content, filename=u'', rootdir=u'.'):

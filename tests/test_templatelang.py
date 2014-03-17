@@ -11,12 +11,14 @@ class TestTemplateLanguage(unittest.TestCase):
 
     def setUp(self):
 
-        def _test(args, context, body=u''):
+        def _test(*args, **kwargs):
+            args = list(args)
+            body = kwargs.pop('body',u'')
             if body:
                 args.append(body)
             return u', '.join(args)
 
-        self.lang = TemplateLanguage({'t': _test})
+        self.lang = TemplateLanguage(tags={'t': _test}, development=True)
 
         self.unicodedata = []
         for line in _testfile("unicodedata.txt"):
