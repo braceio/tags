@@ -73,6 +73,7 @@ If you want to be specific about what files to compile, or where your site gets 
 
 As mentioned above, you can track the changes in your site folder and re-build automatically with the `--watch` option. However this requires that you first install `watchdog`.
 
+    easy_install watchdog
     tags build --watch
 
 The `serve` command will start a local webserver that you can use for testing. 
