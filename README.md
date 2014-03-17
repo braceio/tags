@@ -48,7 +48,7 @@ In the `/tags/tags.py` file you'll find a function for each template tag. Adding
 1. Create a new function that will be called by the generator when it encounters your tag. It should look like this:
 
         def print3x_tag(args, context, body=u''):
-            ''' A tag that appends 3 copies of it's body '''
+            ''' A tag that appends 3 copies of its body '''
             return body + body + body
 
    The arguments that the function accepts should be:
