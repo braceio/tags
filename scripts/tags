@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+
+import argparse
+
+from tags import generator
+
+if __name__=='__main__':
+
+    parser = argparse.ArgumentParser(
+        description="Tags, the simplest static site generator.")
+
+    parser.add_argument('command', help=
+        "either `build` or `serve`")
+
+    parser.add_argument('-r', '--root', help=
+        '''The root folder containing your source files. Defaults to the current 
+        folder.''', 
+        type=str, default='.')
+   
+    parser.add_argument('-f', '--files', help=
+        '''A file pattern specifying what files to compile. The pattern can 
+        include * wildcards and the special ** path wildcard. For example 
+        'www/**/*.html' will build all html files under the www folder and any
+        subfolders. Files that don't match this pattern will be copied into
+        the output folder unchanged. Defaults to '**/*.html'.''', 
+        type=str, default='**/*.html')
+
+    parser.add_argument('-E', '--exclude', help=
+        '''A file pattern specifying which files should be excluded from the
+        generated website. Uses file and folder wildcards. (see -f) Default 
+        is '_*/**' which excludes all folders starting with an underscore.''', 
+        type=str, default='_*/**')
+
+    parser.add_argument('-o', '--output', help=
+        '''The folder where your built files should be placed. Defaults to the 
+        _site folder.''', 
+        type=str, default='_site')
+   
+    parser.add_argument('-p', '--port', help=
+        '''The port to be used for the http server. Default is 8000''', 
+        type=int, default=8000)
+   
+    parser.add_argument('-w', '--watch', help=
+        '''Continuously scan for changes. Note this requires that you 
+        separately install the watchdog library, which can be accomplished with 
+        'easy_install watchdog'.''', 
+        action='store_true')
+
+    parser.add_argument('-F', '--force', help=
+        '''Build this site even if there's no index.html file at the root.''', 
+        action='store_true')
+   
+    args = parser.parse_args()
+
+    if args.command == 'build':
+        generator.build_files(root=args.root,
+                              dest=args.output,
+                              pattern=args.files,
+                              exclude=args.exclude,
+                              watch=args.watch,
+                              force=args.force)
+
+    elif args.command == 'serve':
+        generator.serve_files(root=args.root,
+                              dest=args.output,
+                              pattern=args.files,
+                              exclude=args.exclude,
+                              watch=args.watch,
+                              port=args.port,
+                              force=args.force)
+
+    else:
+        parser.print_help()
