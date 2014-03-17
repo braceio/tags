@@ -39,7 +39,7 @@ nav.html:
     </ul>        
 
 
-That's basically all there is to Brace Tags. There's almost zero conventions or syntax to learn. It doesn't currently support markdown, or provide fancy optimizations. It's just here to help you avoid duplicating HTML boilerplate on several web pages.
+That's basically all there is to Brace Tags. There's almost zero convention or syntax to learn. It doesn't currently support markdown, or provide fancy optimizations. It's just here to help you avoid duplicating HTML boilerplate on several web pages.
 
 
 ## Installing Brace Tags
@@ -69,10 +69,11 @@ Serve will start a local webserver that you can use for testing.
 
     tags serve
 
+By default, Brace Tags compiles all the .html files in your site. Tags places the generated site in the `_site` folder, and ignores those files during future builds. (In fact, it ignores all folders that start with an underscore.)
+
 If you want to be specific about what files to compile, or where your site gets generated, you can specify that with the `--files` and `--out` options:
 
     tags build --files docs/*.html --out www/docs
-
 
 As mentioned above, you can track the changes in your site folder and re-build automatically with the `--watch` option. However this requires that you first install `watchdog`.
 
