@@ -47,9 +47,9 @@ In the `/tags/tags.py` file you'll find a function for each template tag. Add yo
 
 1. Create a new function that will be called by the generator when it encounters your tag. It should look like this:
 
-       def print3x_tag(args, context, body=u''):
-           ''' A function that appends 3 copies of the body '''
-           return body + body + body
+         def print3x_tag(args, context, body=u''):
+             ''' A function that appends 3 copies of the body '''
+             return body + body + body
 
    The arguments that the function accepts should be:
 
@@ -62,12 +62,12 @@ In the `/tags/tags.py` file you'll find a function for each template tag. Add yo
 
 2. Add the function to the `keys` dictionary that's used to create the template language. For example:
 
-       tags = {
-           'include': include_tag,
-           'is': is_tag,
-           'print3x': print3x_tag  # <-- my new tag
-       }
-       lang = TemplateLanguage(tags)
+         tags = {
+             'include': include_tag,
+             'is': is_tag,
+             'print3x': print3x_tag  # <-- my new tag
+         }
+         lang = TemplateLanguage(tags)
 
 That's it!
 
