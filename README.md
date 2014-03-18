@@ -12,7 +12,7 @@ navigation or footer code. Here's how:
 1. Extract common HTML snippets from your website into separate HTML files
 called "partials".
 
-2. Include those snippets into several pages with a special tag.
+2. Include those partials into several pages with a special tag.
 
 3. Run the `tags build` command to assemble the website from your source code.
 You can put the generated site online using any static site hosting provider.
