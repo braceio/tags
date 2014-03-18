@@ -3,22 +3,27 @@ Brace Tags
 
 > The simplest static site generator
 
-Brace Tags is a static site generator focused on simplicity. It solves the
-problem of having to repeat the same HTML code on several web pages.
+Brace Tags is a static site generator focused on simplicity. It does one thing:
+solves the problem of having to repeat the same HTML code on several web pages.
 
-You can use Tags to build a multi-page static website without duplicating
-navigation or footer code. Here's how:
+The template language provided by Brace Tags only has two tags, `include` and
+`is`.
 
-1. Extract common HTML snippets from your website into separate HTML files
-called "partials".
 
-2. Include those partials into several pages with a special tag.
+## Static Site Generation 101
+
+You can use a Brace Tags to build a multi-page static website without
+duplicating navigation or footer code. Here's generally how it works:
+
+1. Find duplicated code snippets in your HTML files. Extract them into separate
+files called "partials".
+
+2. Replace each duplicated code snippet with a special placeholder tag. This is
+where the content from the partial will be injected.
 
 3. Run the `tags build` command to assemble the website from your source code.
 You can put the generated site online using any static site hosting provider.
 
-The template language provided by Brace Tags only has two tags, `include` and
-`is`.
 
 ## An example Brace Tags website
 
