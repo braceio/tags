@@ -179,3 +179,18 @@ You can also define tags that accept a variable argument list like so:
 
 When called, the `*args` parameter will contain the variable argument list, and
 the `body` and `context` keyword args will be in the `**kwargs` dictionary.
+
+### Using a modified version of Brace Tags
+
+You can install your fork of Tags by first uninstalling the stock version...
+
+    pip uninstall brace-tags
+
+And then installing your modified version:
+
+    pip install -e path/to/your/brace-tags
+
+You don't need to reinstall this package after making changes. The package will
+stay up-to-date automatically.
+
+
