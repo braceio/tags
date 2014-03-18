@@ -160,7 +160,7 @@ When adding a new tag function, here are some things you should know:
 `add_tag_with_name` decorator to supply a tag name.
 
 - The positional arguments of the function define the tag's required arguments.
-In the above case, the print3x tag requires one argument, `style`.
+In the above case, the print3x tag requires one argument, a `style`.
 
 - If you specify a `body` keyword argument, then the tag will require a body.
 The body is the content between the opening tag and an end tag.
