@@ -3,3 +3,6 @@
 *.pyc
 
 _site
+
+MANIFEST
+dist

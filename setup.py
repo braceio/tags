@@ -4,8 +4,8 @@ from distutils.core import setup
 root = os.path.dirname(os.path.realpath(__file__))
 
 setup(
-    name='tags',
-    version='0.1.0',
+    name='brace-tags',
+    version='1.0.3',
     author='Cole Krumbholz, Lauri Hynynen',
     author_email='team@brace.io',
     description='The simplest static site generator',
