@@ -9,8 +9,8 @@ problem of having to repeat the same HTML code on several web pages.
 You can use Tags to build a multi-page static website without duplicating
 navigation or footer code. Here's how:
 
-1. Extract common HTML snippets from your website into separate files called
-"partials".
+1. Extract common HTML snippets from your website into separate HTML files
+called "partials".
 
 2. Include those snippets into several pages with a special tag.
 
