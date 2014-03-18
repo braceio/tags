@@ -37,7 +37,7 @@ def build_files(root=u'.', dest=u'_site', pattern=u'**/*.html',
             print(msg)
             sys.exit(1)
 
-    print("Buliding site from '{0}' into '{1}'".format(root, dest))
+    print("Building site from '{0}' into '{1}'".format(root, dest))
 
     exclude = exclude or os.path.join(dest, u'**')
     for filename in utils.walk_folder(root or '.'):

@@ -33,10 +33,10 @@ nav.html:
 
     <ul>
       <li>
-        <a href="/" {% is index.html %}class="active"{% endis %}>
+        <a href="/" {% is index.html %}class="active"{% endis %}>home</a>
       </li>
       <li>
-        <a href="/about.html" {% is about.html %}class="active"{% endis %}>
+        <a href="/about.html" {% is about.html %}class="active"{% endis %}>about</a>
       </li>
     </ul>        
 
