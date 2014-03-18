@@ -189,7 +189,7 @@ You can install your fork of Tags by first uninstalling the stock version...
 
 And then installing your modified version:
 
-    pip install -e path/to/your/brace-tags
+    pip install -e path/to/your/brace-tags/folder
 
 You don't need to reinstall this package after making changes. The package will
 stay up-to-date automatically.
