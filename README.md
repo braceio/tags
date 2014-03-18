@@ -55,7 +55,7 @@ install it with `easy_install` by opening up your terminal and typing in:
     sudo easy_install brace-tags
 
 (The sudo part will ask you to log-in. It's required because Brace Tags needs to
-(install the `tags` command line script.)
+install the `tags` command line script.)
 
 Alternatively, if you're familiar with Python, you can use pip to install it:
 
@@ -105,11 +105,11 @@ For more options and explanation, check out the help:
 Brace Tags was built to be easily extended. You can add your own tags to
 implement custom functionality.
 
-The a custom tag should look like this:
+A custom tag should look like this:
 
     {% mytag argument1 argument2 %}
 
-Optionally, a tag can have a body like this:
+Optionally, a tag can have a body, like this:
 
     {% mytag %}
       Tag Body
