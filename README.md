@@ -47,7 +47,7 @@ about.html:
     <html>
       <body>
         {% include nav.html %}
-        Tags is very simple!
+        Brace Tags is very simple!
       </body>
     </html>
 
