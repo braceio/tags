@@ -109,8 +109,10 @@ For more options and explanation, check out the help:
 ## Hosting your static site
 
 Once you've generated a static site with Brace Tags, you can deploy it to any
-static site host. Github pages and S3 are just a couple of the many options.  Of
-course we'd love for you host your site with us, on [Brace](http://brace.io)!
+static site host. Github pages and S3 are just a couple of the many options. 
+
+Of course we'd love for you host your site with us, on
+[Brace](http://brace.io)!
 
 ## Advanced: Extending Brace Tags
 
