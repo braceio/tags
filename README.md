@@ -34,7 +34,7 @@ index.html:
 
     <html>
       <body>
-        {% include nav.html %}  <!-- including a partial -->
+        {% include nav.html %}  <!-- include the nav partial -->
         Welcome to Brace Tags!
       </body>
     </html>
