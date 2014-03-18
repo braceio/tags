@@ -151,8 +151,9 @@ In this case the tag requires one argument, `style`.
 The body is the content between the opening tag and an end tag.
 
 - All tag functions must accept a `context` keyword argument. This is a
-dictionary containing contextual data passed in by the generator. By default
-context includes a `filename` key providing the current file being generated.
+dictionary containing contextual data passed in by the generator. By default,
+context includes a `filename` key whose value is the file currently being
+generated.
 
 
 You can also define tags that accept a variable argument list like so:
