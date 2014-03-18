@@ -3,8 +3,8 @@ Brace Tags
 
 > The simplest static site generator
 
-Brace Tags is a command line static site generator focused on simplicity. It's
-provides a minimal template language with just two tags: `include` and `is`.
+Brace Tags is a static site generator focused on simplicity. It provides a
+minimal template language with just two tags: `include` and `is`.
 
 Brace Tags solves the problem of having duplicated HTML in several web pages. It
 lets you create reusable HTML snippets, or "partials", that you can include into
