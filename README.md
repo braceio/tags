@@ -71,8 +71,9 @@ Note: you'll need to define CSS styles separately to take advantage of the
 
 ## Installing Brace Tags
 
-Brace Tags is written in Python. Most computers today come with Python. You can
-install it with `easy_install` by opening up your terminal and typing in:
+Brace Tags requires Python. Many computers today come with Python pre-installed,
+including all macbooks. If you have Python, you can install Brace Tags with
+`easy_install` by opening up your terminal and typing in:
 
     sudo easy_install brace-tags
 
