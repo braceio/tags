@@ -11,7 +11,7 @@ The template language provided by Brace Tags has only two tags, `include` and
 `is`.
 
 
-## Static Site Generation 101
+## Static site generation 101
 
 You can use Brace Tags to build a multi-page static website without
 duplicating navigation or footer code. Here's generally how it works:
@@ -108,11 +108,13 @@ For more options and explanation, check out the help:
 
 ## Hosting your static site
 
-There are lots of places to host a static site. Github pages and S3 are just a
-few options. Of course we'd love it if you host your site with us, on
+Once you've generated a static site with Brace Tags, you can deploy it to any
+static site host. Github pages and S3 are just a couple of the many options. 
+
+Of course we'd love for you host your site with us, on
 [Brace](http://brace.io)!
 
-## Extending Brace Tags
+## Advanced: Extending Brace Tags
 
 If you're a python programmer, you can add your own tags to implement custom
 functionality on top of Brace Tags.
