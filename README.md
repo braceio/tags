@@ -51,9 +51,9 @@ about.html:
       </body>
     </html>
 
-The navigation partial knows what page is being generated, and can adjust its
-content appropriately with the `is` tag. You can use this, for example, to
-highlight the current page in the nav menu.
+The `is` tag is used to adjust the content of a partial based on which page is
+currently being generated. You can use this, for example, to highlight the
+current page in the nav partial.
 
 nav.html:
 
