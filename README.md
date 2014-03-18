@@ -5,6 +5,7 @@ Brace Tags
 
 Brace Tags is a static site generator focused on simplicity. It does one thing:
 solves the problem of having to repeat the same HTML code on several web pages.
+(Also known as "partials")
 
 The template language provided by Brace Tags only has two tags, `include` and
 `is`.
@@ -18,9 +19,9 @@ duplicating navigation or footer code. Here's generally how it works:
 1. Find duplicated code snippets in your HTML files. Extract them into separate
 files called "partials".
 
-2. Replace each duplicated code snippet with a special placeholder tag. It looks
-like `{% include mypartial.html %}`. This is where the content from a partial
-will be injected.
+2. Replace each duplicated code snippet with a special placeholder tag. The tag
+looks like: `{% include mypartial.html %}`. This is where the content from a
+partial will be injected.
 
 3. Run the `tags build` command to assemble the website from your source code.
 You can put the generated site online using any static site hosting provider.
