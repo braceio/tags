@@ -136,6 +136,8 @@ is substituted in the output.
 In the `/tags/tags.py` file you'll find a function for each template tag. Add
 your custom tag functions to that file. They should look something like this:
 
+    lang = TemplateLanguage()
+
     @lang.add_tag
     def print3x(style, body=u'', context={}):
         ''' A tag that appends 3 copies of its body '''
@@ -144,7 +146,7 @@ your custom tag functions to that file. They should look something like this:
             result = u'<b>' + result + u'</b>'
         return result
 
-The above function defines a print3x tag that would be called like this:
+The above function creates a print3x tag that can be used like this:
 
     {% print3x bold %}
       <h1> ROBOTS, MAKE MY HTML! </h1>
@@ -154,12 +156,11 @@ When adding a new tag function, here are some things you should know:
 
 - The `add_tag` decorator adds the tag function to the template language.
 
-- The tag's name is taken from the function's name. For example, the function
-above creates a `print3x` tag. Optionally you can use the `add_tag_with_name`
-decorator to supply a tag name.
+- The tag's name is taken from the function's name. Optionally you can use the
+`add_tag_with_name` decorator to supply a tag name.
 
 - The positional arguments of the function define the tag's required arguments.
-In this case the tag requires one argument, `style`.
+In the above case, the print3x tag requires one argument, `style`.
 
 - If you specify a `body` keyword argument, then the tag will require a body.
 The body is the content between the opening tag and an end tag.
