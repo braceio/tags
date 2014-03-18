@@ -64,6 +64,8 @@ nav.html:
       </li>
     </ul>        
 
+Note: you'll need to define CSS styles separately to take advantage of the
+`active` class attribute used above.
 
 ## Installing Brace Tags
 
