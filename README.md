@@ -18,8 +18,9 @@ duplicating navigation or footer code. Here's generally how it works:
 1. Find duplicated code snippets in your HTML files. Extract them into separate
 files called "partials".
 
-2. Replace each duplicated code snippet with a special placeholder tag. This is
-where the content from the partial will be injected.
+2. Replace each duplicated code snippet with a special placeholder tag. It looks
+like `{% include mypartial.html %}`. This is where the content from a partial
+will be injected.
 
 3. Run the `tags build` command to assemble the website from your source code.
 You can put the generated site online using any static site hosting provider.
@@ -77,15 +78,10 @@ install it with `easy_install` by opening up your terminal and typing in:
 (The sudo part will ask you to log-in. It's required because Brace Tags needs to
 install the `tags` command line script.)
 
-Alternatively, if you're familiar with Python, you can use pip to install it:
-
-    pip install brace-tags
-
 Brace has one external dependency, `watchdog` which is only required if you want
 to use Brace to monitor a folder for changes, and recompile your site on the
-fly. Before using the `--watch` option you'll need to install `watchdog`.
-
-    easy_install watchdog
+fly. Before using the `--watch` option you'll need to install `watchdog` with
+`sudo easy_install watchdog`.
 
 
 ## Using Brace Tags
@@ -97,21 +93,10 @@ used to generate a site from a source folder.
 
 By default, Brace Tags compiles all the .html files in your site. Tags places
 the generated site in the `_site` folder, and ignores those files during future
-builds. (In fact, it ignores all folders that start with an underscore.)
+builds. 
 
-If you want to be specific about what files to compile, or where your site gets
-generated, you can specify that with the `--files` and `--out` options:
-
-    tags build --files docs/*.html --out www/docs
-
-As mentioned above, you can track the changes in your site folder and re-build
-automatically with the `--watch` option. However this requires that you first
-install `watchdog`.
-
-    easy_install watchdog
-    tags build --watch
-
-The `serve` command will start a local webserver that you can use for testing. 
+Once built, the `serve` command will start a local webserver that you can use
+to view the website locally with your browser. This is for testing only.
 
     tags serve
 
@@ -119,13 +104,18 @@ For more options and explanation, check out the help:
 
     tags --help
 
+## Hosting your static site
+
+There are lots of places to host a static site. Github pages and S3 are just a
+few options. Of course we'd love it if you host your site with us, on
+[Brace](http://brace.io)!
 
 ## Extending Brace Tags
 
-Brace Tags was built to be easily extended. You can add your own tags to
-implement custom functionality.
+If you're a python programmer, you can add your own tags to implement custom
+functionality on top of Brace Tags.
 
-A custom tag should look like this:
+Custom tags should look like this:
 
     {% mytag argument1 argument2 %}
 
@@ -135,12 +125,12 @@ Optionally, a tag can have a body, like this:
       Tag Body
     {% endmytag %}
 
-When Tags generates a file, each time it encounters a tag in the input, it
-checks for a corresponding tag function. If the function exists, it is called
-and returns a string that's substituted in the output.
+Each time Brace Tags encounters a tag in an input file it checks for a
+corresponding tag function. If the function exists, it is called and the result
+is substituted in the output.
 
 In the `/tags/tags.py` file you'll find a function for each template tag. Add
-your custom tag functions here. They should look something like this:
+your custom tag functions to that file. They should look something like this:
 
     @lang.add_tag
     def print3x(style, body=u'', context={}):
