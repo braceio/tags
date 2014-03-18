@@ -3,22 +3,33 @@ Brace Tags
 
 > The simplest static site generator
 
-Brace Tags is a static site generator focused on simplicity. It provides a
-minimal template language with just two tags: `include` and `is`.
+Brace Tags is a static site generator focused on simplicity. It solves the
+problem of having to repeat the same HTML code on several web pages.
 
-Brace Tags solves the problem of having duplicated HTML in several web pages. It
-lets you create reusable HTML snippets, or "partials", that you can include into
-several pages. You can use Tags to build a multi-page static website with common
-navigation and footer code.
+You can use Tags to build a multi-page static website without duplicating
+navigation or footer code. Here's how:
 
-Here's an example site using Tags. We can include an HTML snippet for the 
-main navigation into each page with the `include` tag:
+1. Extract common HTML snippets from your website into separate files called
+"partials".
+
+2. Include those snippets into several pages with a special tag.
+
+3. Run the `tags build` command to assemble the website from your source code.
+You can put the generated site online using any static site hosting provider.
+
+The template language provided by Brace Tags only has two tags, `include` and
+`is`.
+
+## An example Brace Tags website
+
+Here's a simple multi-page website with `index.html` and `about.html` files. We
+can add the main navigation into each page with the `include` tag.
 
 index.html:
 
     <html>
       <body>
-        {% include nav.html %}  <!-- Including a partial -->
+        {% include nav.html %}  <!-- including a partial -->
         Welcome to Brace Tags!
       </body>
     </html>
@@ -33,8 +44,9 @@ about.html:
       </body>
     </html>
 
-The navigation partial knows what page is being viewed, and adjusts content with
-the "is" tag:
+The navigation partial knows what page is being generated, and can adjust its
+content appropriately with the "is" tag. You can use this to highlight the
+current page in the nav menu.
 
 nav.html:
 
@@ -46,12 +58,6 @@ nav.html:
         <a href="/about.html" {% is about.html %}class="active"{% endis %}>about</a>
       </li>
     </ul>        
-
-
-That's basically all there is to Brace Tags. There's almost zero convention or
-syntax to learn. It doesn't currently support markdown, or provide fancy
-optimizations. It's just here to help you avoid duplicating HTML boilerplate on
-several web pages.
 
 
 ## Installing Brace Tags
