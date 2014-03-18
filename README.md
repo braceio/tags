@@ -3,17 +3,22 @@ Brace Tags
 
 > The simplest static site generator
 
-Tags is a command line static site generator focused on simplicity. There are
-only two tags: `include` and `is`. It's meant for building multi-page static
-sites with common navigation and footer code.
+Brace Tags is a command line static site generator focused on simplicity. It's
+provides a minimal template language with just two tags: `include` and `is`.
 
-Here's an example site using Tags:
+Brace Tags solves the problem of having duplicated HTML in several web pages. It
+lets you create reusable HTML snippets, or "partials", that you can include into
+several pages. You can use Tags to build a multi-page static website with common
+navigation and footer code.
+
+Here's an example site using Tags. We can include an HTML snippet for the 
+main navigation into each page with the `include` tag:
 
 index.html:
 
     <html>
       <body>
-        {% include nav.html %}
+        {% include nav.html %}  <!-- Including a partial -->
         Welcome to Brace Tags!
       </body>
     </html>
@@ -28,6 +33,8 @@ about.html:
       </body>
     </html>
 
+The navigation partial knows what page is being viewed, and adjusts content with
+the "is" tag:
 
 nav.html:
 
