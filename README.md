@@ -77,8 +77,8 @@ including all macbooks. If you have Python, you can install Brace Tags with
 
     sudo easy_install brace-tags
 
-(The sudo part will ask you to log-in. It's required because Brace Tags needs to
-install the `tags` command line script.)
+(The sudo part will ask you to provide a password. It's required because Brace
+Tags needs to install the `tags` command line script.)
 
 Brace has one external dependency, `watchdog` which is only required if you want
 to use Brace to monitor a folder for changes, and recompile your site on the
