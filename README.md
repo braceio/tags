@@ -51,7 +51,7 @@ about.html:
       </body>
     </html>
 
-The `is` tag is used to adjust the content of a partial based on which page is
+The `is` tag is used to change the content of a partial based on the file that's
 currently being generated. You can use this, for example, to highlight the
 current page in the nav partial.
 
