@@ -13,7 +13,7 @@ The template language provided by Brace Tags has only two tags, `include` and
 
 ## Static Site Generation 101
 
-You can use a Brace Tags to build a multi-page static website without
+You can use Brace Tags to build a multi-page static website without
 duplicating navigation or footer code. Here's generally how it works:
 
 1. Find duplicated code snippets in your HTML files. Extract them into separate
