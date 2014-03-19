@@ -9,8 +9,8 @@ if __name__=='__main__':
     parser = argparse.ArgumentParser(
         description="Tags, the simplest static site generator.")
 
-    parser.add_argument('command', help=
-        "either `build` or `serve`")
+    parser.add_argument('command', nargs='?', default='', help=
+        "either 'build', 'serve' or 'new'")
 
     parser.add_argument('-r', '--root', help=
         '''The root folder containing your source files. Defaults to the current 
@@ -69,5 +69,10 @@ if __name__=='__main__':
                               port=args.port,
                               force=args.force)
 
+    elif args.command == 'new':
+        generator.new_site(root=args.root,
+                           force=args.force)
+
     else:
+        print("Oops, please provide a valid command, either 'build', 'serve' or 'new'.")
         parser.print_help()

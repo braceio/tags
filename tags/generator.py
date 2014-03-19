@@ -180,3 +180,70 @@ def serve_files(root=u'.', dest=u'_site', pattern=u'**/*.html',
             httpd.shutdown()
 
 
+
+NEW_INDEX_STR = """<!DOCTYPE html>
+<html>
+{% include _partials/header.html %}
+<body>
+  {% include _partials/nav.html %}
+  <h1>Welcome!</h1>
+</body>
+</html>"""
+
+NEW_ABOUT_STR = """<!DOCTYPE html>
+<html>
+{% include _partials/header.html %}
+<body>
+  {% include _partials/nav.html %}
+  <h1>About!</h1>
+</body>
+</html>"""
+
+NEW_HEADER_STR = """
+<head>
+  <title>My new site</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>"""
+
+NEW_NAV_STR = """
+  <ul>
+    <li>
+      <a href="/"{% is index.html %} class="active"{% endis %}>
+        home
+      </a>
+    </li>
+    <li>
+      <a href="/about.html"{% is about.html %} class="active"{% endis %}>
+        about
+      </a>
+    </li>
+  </ul>"""
+
+NEW_STYLE_STR = """.active {font-weight:bold;}"""
+
+NEW_SITE = {
+    'index.html': NEW_INDEX_STR,
+    'about.html': NEW_ABOUT_STR,
+    '_partials/header.html': NEW_HEADER_STR,
+    '_partials/nav.html': NEW_NAV_STR,
+    'css/style.css': NEW_STYLE_STR
+}
+
+def new_site(root=u'.', force=False):
+    try:
+        os.stat(os.path.join(root, 'index.html'))
+        if not force:
+            msg = "Oops, there's already an index.html file in the source \n"+\
+                  "folder. If you want to overwrite this folder with a new \n"+\
+                  "site, use the --force option."
+            print(msg)
+            sys.exit(1)
+    except OSError:
+        pass
+
+    print("Creating new site in '{0}'.".format(root))
+
+    for fname, text in NEW_SITE.items():
+        fpath = os.path.join(root, fname)
+        with utils.open_file(fpath, "w", create_dir=True) as afile:
+            afile.write(text)
