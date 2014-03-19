@@ -16,13 +16,14 @@ def build_file(filename, outfilename, root=u'.', create_dir=True):
     filepath = os.path.join(root, filename)
     with utils.open_file(filepath) as infile:
         try:
-            output = tags.render(infile.read(), filename=filename, rootdir=root)
+            content = unicode(infile.read(), 'utf-8')
+            output = tags.render(content, filename=filename, rootdir=root)
         except templatelang.ParseBaseException as e:
             utils.print_parse_exception(e, filename)
             return
 
     with utils.open_file(outfilename, "w", create_dir=create_dir) as outfile:
-        outfile.write(output)
+        outfile.write(output.encode('utf-8'))
 
 
 def build_files(root=u'.', dest=u'_site', pattern=u'**/*.html', 
