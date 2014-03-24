@@ -2,6 +2,8 @@ import os
 import sys
 import time
 import posixpath
+import threading
+
 if sys.version > '3':
     import urllib.parse
     from http.server import HTTPServer
@@ -10,7 +12,7 @@ else:
     import urllib
     from BaseHTTPServer import HTTPServer
     from SimpleHTTPServer import SimpleHTTPRequestHandler
-import threading
+
 from . import tags
 from . import utils
 from . import templatelang
