@@ -4,23 +4,23 @@ import shutil
 
 
 def print_parse_exception(exc, filename=None):
-    msg = u"Parse Error "
+    msg = "Parse Error "
     if filename:
         msg += "while compiling {0}".format(filename)
     msg += ": " + exc.msg + "\n"
     msg += exc.line + "\n"
-    msg += u" "*(exc.column-1) + u"^"
-    print msg
+    msg += " "*(exc.column-1) + "^"
+    print(msg)
 
 
-def walk_folder(root=u'.'):
+def walk_folder(root='.'):
     for subdir, dirs, files in os.walk(root):
-        reldir = subdir.lstrip(root).lstrip(u'/')
+        reldir = subdir.lstrip(root).lstrip('/')
         for filename in files:
             yield os.path.join(reldir, filename)
 
 
-def open_file(path, mode='rb', create_dir=False, create_mode=0755):
+def open_file(path, mode='rb', create_dir=False, create_mode=0o755):
     # Opens the given path. If create_dir is set, will
     # create all intermediate folders necessary to open
     try:
@@ -40,7 +40,7 @@ def open_file(path, mode='rb', create_dir=False, create_mode=0755):
     return newfile
 
 
-def copy_file(src, dst, create_dir=True, create_mode=0755):
+def copy_file(src, dst, create_dir=True, create_mode=0o755):
     try:
         shutil.copy2(src, dst)
     except IOError:

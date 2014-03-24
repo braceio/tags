@@ -8,8 +8,8 @@ import inspect
 
 class TagErrorArguments(Exception):
     def __init__(self, tagname, nargs, args):
-        params = (tagname, nargs, u" ".join(args))
-        errstr = u"malformed tag '{0}' should have {1} argument(s), got '{2}'"
+        params = (tagname, nargs, " ".join(args))
+        errstr = "malformed tag '{0}' should have {1} argument(s), got '{2}'"
         self.msg = errstr.format(*params)
 
     def __str__(self):
@@ -18,10 +18,10 @@ class TagErrorArguments(Exception):
 
 class TagErrorBody(Exception):
     def __init__(self, tagname, req_body, has_body):
-        req = u'' if req_body else u"n't"
-        has = u'does' if has_body else u"doesn't"
+        req = '' if req_body else "n't"
+        has = 'does' if has_body else "doesn't"
         params = (tagname, req, has)
-        errstr = u"malformed tag '{0}' should{1} have a body, but {2}"
+        errstr = "malformed tag '{0}' should{1} have a body, but {2}"
         self.msg = errstr.format(*params)
 
     def __str__(self):
@@ -34,7 +34,7 @@ class TagErrorException(ParseBaseException):
             import traceback
             msg = traceback.print_exc()
         else:
-            msg = unicode(exc)
+            msg = str(exc)
         super(TagErrorException, self).__init__(parsestr, loc=loc, msg=msg)
 
 
@@ -44,7 +44,7 @@ class TagErrorException(ParseBaseException):
 
 def debug_action(name=''):
     def _wrapped(parsestr, loc, tokens):
-        print name, ": ", parsestr[0:loc], '*', parsestr[loc:], "-->", tokens
+        print(name, ": ", parsestr[0:loc], '*', parsestr[loc:], "-->", tokens)
     return _wrapped
 
 
@@ -134,7 +134,7 @@ class TemplateLanguage(object):
     def _mkopentag(self, name):
         tagname = CaselessKeyword(name)
         quote = quotedString.setParseAction(removeQuotes)
-        arg = Optional(White()).suppress() + CharsNotIn(u" \t\r\n")
+        arg = Optional(White()).suppress() + CharsNotIn(" \t\r\n")
         args = Group(ZeroOrMore(quote | arg))
         rawargs = SkipTo(self._tagclose)
         rawargs.setParseAction(lambda toks: args.parseString(toks[0]))
@@ -154,11 +154,11 @@ class TemplateLanguage(object):
 
 
     def _mkparser(self, tags):
-        onechar = CharsNotIn(u'', exact=1)
+        onechar = CharsNotIn('', exact=1)
         freetext = Combine(OneOrMore(~self._tagopen + ~self._tagclose + onechar))
         anytag = Forward()
         body = originalTextFor(ZeroOrMore(anytag | freetext))
-        anytag << MatchFirst([self._mktag(key, body) for key in tags.keys()])
+        anytag << MatchFirst([self._mktag(key, body) for key in list(tags.keys())])
         return anytag
 
 
@@ -187,7 +187,7 @@ class TemplateLanguage(object):
 
     # public methods ----------------------------------------------------------
 
-    def __init__(self, tags=None, openseq=u'{%', closeseq=u'%}', development=False):
+    def __init__(self, tags=None, openseq='{%', closeseq='%}', development=False):
         ''' Creates a new template language instance.
 
         If the tag keyword argument isn't provided, tags should be created
@@ -204,7 +204,7 @@ class TemplateLanguage(object):
         self._tagclose = Literal(closeseq).suppress()
 
         if tags:
-            for name, fn in tags.iteritems():
+            for name, fn in tags.items():
                 self.add_tag_with_name(name)(fn)
             self._parser = self._mkparser(self._tags)
         else:

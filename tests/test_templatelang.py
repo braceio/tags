@@ -1,5 +1,6 @@
 import unittest
 import os
+import sys
 
 from tags.templatelang import TemplateLanguage
 
@@ -13,16 +14,19 @@ class TestTemplateLanguage(unittest.TestCase):
 
         def _test(*args, **kwargs):
             args = list(args)
-            body = kwargs.pop('body',u'')
+            body = kwargs.pop('body','')
             if body:
                 args.append(body)
-            return u', '.join(args)
+            return ', '.join(args)
 
         self.lang = TemplateLanguage(tags={'t': _test}, development=True)
 
         self.unicodedata = []
         for line in _testfile("unicodedata.txt"):
-            test, result = unicode(line, 'utf-8').split(' --> ')
+            if sys.version > '3':
+                test, result = str(line).split(' --> ')
+            else:
+                test, result = unicode(line, 'utf-8').split(' --> ')
             self.unicodedata.append({
                 'test': test.strip(), 
                 'result': result.strip()

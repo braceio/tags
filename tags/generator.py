@@ -2,32 +2,41 @@ import os
 import sys
 import time
 import posixpath
-import urllib
+if sys.version > '3':
+    import urllib.parse
+    from http.server import HTTPServer
+    from http.server import SimpleHTTPRequestHandler
+else:
+    import urllib
+    from BaseHTTPServer import HTTPServer
+    from SimpleHTTPServer import SimpleHTTPRequestHandler
 import threading
+from . import tags
+from . import utils
+from . import templatelang
 
-from BaseHTTPServer import HTTPServer
-from SimpleHTTPServer import SimpleHTTPRequestHandler
-
-import tags
-import utils
-import templatelang
-
-def build_file(filename, outfilename, root=u'.', create_dir=True):
+def build_file(filename, outfilename, root='.', create_dir=True):
     filepath = os.path.join(root, filename)
     with utils.open_file(filepath) as infile:
         try:
-            content = unicode(infile.read(), 'utf-8')
+            if sys.version > '3':
+                content = str(infile.read(), 'utf-8')
+            else:
+                content = unicode(infile.read(), 'utf-8')
             output = tags.render(content, filename=filename, rootdir=root)
         except templatelang.ParseBaseException as e:
             utils.print_parse_exception(e, filename)
             return
 
     with utils.open_file(outfilename, "w", create_dir=create_dir) as outfile:
-        outfile.write(output.encode('utf-8'))
+        if sys.version > '3':
+            outfile.write(output)
+        else:
+            outfile.write(output.encode('utf-8'))
 
-
-def build_files(root=u'.', dest=u'_site', pattern=u'**/*.html', 
-                exclude=u'_*/**', watch=False, force=False):
+            
+def build_files(root='.', dest='_site', pattern='**/*.html', 
+                exclude='_*/**', watch=False, force=False):
     try:
         os.stat(os.path.join(root, 'index.html'))
     except OSError:
@@ -40,7 +49,7 @@ def build_files(root=u'.', dest=u'_site', pattern=u'**/*.html',
 
     print("Building site from '{0}' into '{1}'".format(root, dest))
 
-    exclude = exclude or os.path.join(dest, u'**')
+    exclude = exclude or os.path.join(dest, '**')
     for filename in utils.walk_folder(root or '.'):
         included = utils.matches_pattern(pattern, filename)
         excluded = utils.matches_pattern(exclude, filename)
@@ -67,7 +76,7 @@ def build_files(root=u'.', dest=u'_site', pattern=u'**/*.html',
         observer.join()
 
 
-def _watch(root=u'.', dest=u'_site', pattern=u'**/*.html', exclude=u'_*/**'):
+def _watch(root='.', dest='_site', pattern='**/*.html', exclude='_*/**'):
 
     try:
         from watchdog.observers import Observer
@@ -96,8 +105,8 @@ def _watch(root=u'.', dest=u'_site', pattern=u'**/*.html', exclude=u'_*/**'):
     return observer
 
 
-def serve_files(root=u'.', dest=u'_site', pattern=u'**/*.html', 
-                exclude=u'_*/**', watch=False, port=8000, force=False):
+def serve_files(root='.', dest='_site', pattern='**/*.html', 
+                exclude='_*/**', watch=False, port=8000, force=False):
 
     # setup server
 
@@ -109,9 +118,12 @@ def serve_files(root=u'.', dest=u'_site', pattern=u'**/*.html',
             # normalize path and prepend root directory
             path = path.split('?',1)[0]
             path = path.split('#',1)[0]
-            path = posixpath.normpath(urllib.unquote(path))
+            if sys.version > '3':
+                path = posixpath.normpath(urllib.parse.unquote(path))
+            else:
+                path = posixpath.normpath(urllib.unquote(path))
             words = path.split('/')
-            words = filter(None, words)
+            words = [_f for _f in words if _f]
             
             path = root
             for word in words:
@@ -230,7 +242,7 @@ NEW_SITE = {
     'css/style.css': NEW_STYLE_STR
 }
 
-def new_site(root=u'.', force=False):
+def new_site(root='.', force=False):
     try:
         os.stat(os.path.join(root, 'index.html'))
         if not force:
@@ -244,7 +256,7 @@ def new_site(root=u'.', force=False):
 
     print("Creating new site in '{0}'.".format(root))
 
-    for fname, text in NEW_SITE.items():
+    for fname, text in list(NEW_SITE.items()):
         fpath = os.path.join(root, fname)
         with utils.open_file(fpath, "w", create_dir=True) as afile:
             afile.write(text)

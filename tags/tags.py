@@ -1,8 +1,8 @@
 import os
 
-from templatelang import TemplateLanguage
+from .templatelang import TemplateLanguage
 
-lang = TemplateLanguage(openseq=u'{%', closeseq=u'%}')
+lang = TemplateLanguage(openseq='{%', closeseq='%}')
 
 @lang.add_tag
 def include(path, context={}):
@@ -15,13 +15,13 @@ def include(path, context={}):
 
 
 @lang.add_tag_with_name('is')
-def _is(path, body=u'', context={}):
+def _is(path, body='', context={}):
     '''
     Renders the tag body if the path matches the current file. File paths 
     should be relative to the site's root folder. 
     Ex: {% is index.html %}Home!{% endis %}
     '''
-    return body if path == context.get('filename') else u''
+    return body if path == context.get('filename') else ''
 
 
 # ---- Add your custom tags here! -----
@@ -49,7 +49,7 @@ def _is(path, body=u'', context={}):
 #     return str(len(args))
 
 
-def render(content, filename=u'', rootdir=u'.'):
+def render(content, filename='', rootdir='.'):
     ''' 
     Renders a content string containing template code into an output string. 
     Uses the tags specified above. Filename and rootdir are added to the 
