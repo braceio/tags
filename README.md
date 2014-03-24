@@ -195,3 +195,8 @@ You don't need to reinstall this package after making changes. The package will
 stay up-to-date automatically.
 
 
+## Compatibility
+
+Works with python 2.6, 2.7 and now 3.3 thanks to pyarnold.
+
+
