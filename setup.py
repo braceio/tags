@@ -5,7 +5,7 @@ root = os.path.dirname(os.path.realpath(__file__))
 
 setup(
     name='brace-tags',
-    version='1.0.9',
+    version='1.0.10',
     author='Cole Krumbholz, Lauri Hynynen',
     author_email='team@brace.io',
     description='The simplest static site generator',
