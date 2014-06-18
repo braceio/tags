@@ -15,7 +15,8 @@ def print_parse_exception(exc, filename=None):
 
 def walk_folder(root='.'):
     for subdir, dirs, files in os.walk(root):
-        reldir = subdir.lstrip(root).lstrip('/')
+        reldir = subdir[len(root):] if subdir.startswith(root) else subdir
+        reldir = reldir.lstrip('/')
         for filename in files:
             yield os.path.join(reldir, filename)
 
