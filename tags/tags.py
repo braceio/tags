@@ -1,4 +1,5 @@
 import os
+import sys
 
 from .templatelang import TemplateLanguage
 
@@ -11,7 +12,11 @@ def include(path, context={}):
     to the site's root folder. Ex: {% include nav.html %}
     '''
     fullpath = os.path.join(context.get('rootdir'), path)
-    return open(fullpath).read()
+    if sys.version > '3':
+        stuff = str(open(fullpath).read(), 'utf-8')
+    else:
+        stuff = unicode(open(fullpath).read(), 'utf-8')
+    return stuff
 
 
 @lang.add_tag_with_name('is')
